@@ -1,5 +1,11 @@
 package enums;
 
 public enum CustomerState {
-x
+    QUEUED,
+    SEATED,
+    ORDERED,
+    EATING,
+    READY_TO_PAY,
+    PAID,
+    ABANDONED
 }
