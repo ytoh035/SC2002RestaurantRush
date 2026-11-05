@@ -5,7 +5,7 @@ import domain.RegularCustomer;
 import java.util.List;
 import java.util.Optional;
 
-/** Produces the customer scheduled to arrive on a given turn, with sequential ids. */
+
 public class ArrivalSchedule {
     private final List<Integer> arrivalTurns;
     private int nextCustomerId = 1;
