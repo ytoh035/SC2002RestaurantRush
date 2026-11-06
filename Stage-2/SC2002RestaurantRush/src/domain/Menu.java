@@ -26,4 +26,16 @@ public class Menu {
     public List<MenuItem> getAll() {
         return new ArrayList<>(items); // Returns a copy to protect the original list
     }
+
+    /** Highest price wins; on a tie the item with more preparation units wins. */
+    public MenuItem getMostExpensive() {
+        MenuItem best = items.get(0);
+        for (MenuItem m : items) {
+            if (m.getPriceCents() > best.getPriceCents()
+                || (m.getPriceCents() == best.getPriceCents() && m.getPrepUnits() > best.getPrepUnits())) {
+                best = m;
+            }
+        }
+        return best;
+    }
 }
