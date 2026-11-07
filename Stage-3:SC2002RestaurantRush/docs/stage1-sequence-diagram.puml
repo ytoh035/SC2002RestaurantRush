@@ -1,0 +1,221 @@
+@startuml
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 260
+skinparam defaultFontSize 12
+skinparam ParticipantPadding 6
+skinparam BoxPadding 6
+skinparam note {
+  BackgroundColor #FFF8DC
+  BorderColor #B8A040
+}
+title Stage 1 sequence diagram - Use case: a Regular customer from arrival to payment\n(Base setting, Stage 1 tests/victory.txt, turns 4 to 8 shown, then the result check)
+actor Manager
+participant ":RestaurantCLI" as CLI <<boundary>>
+participant ":GameEngine" as GE <<control>>
+participant ":Waiter" as W
+participant ":Chef" as CH
+participant ":Cashier" as CA
+participant ":ArrivalSchedule" as AS
+participant ":Restaurant" as R
+participant ":WaitingQueue" as Q
+participant "table2:Table" as T
+participant "c2:RegularCustomer" as C2
+participant ":Menu" as M
+participant "o2:Order" as O
+participant ":GameStats" as GS
+
+note over Manager, GE
+Starting conditions (start of turn 4):
+- Customer 1 (Regular) is EATING at Table 1 (served on turn 3).
+- Table 2 is free. No orders are waiting for the Chef.
+- Customer 2 is scheduled to arrive this turn as a Regular customer.
+Outcome: customer 2 pays $15.00 on turn 8 with satisfaction 84;
+after turn 18 the game ends in VICTORY (5 paid, revenue $66.00, avg satisfaction 79.2).
+end note
+
+loop !engine.isGameOver() one pass per turn (CLI.run())
+== Turn 4: customer 2 arrives and the Waiter seats them ==
+CLI -> GE : startTurn()
+activate GE
+GE -> AS : customerArrivingOn(4)
+create C2
+AS -> C2 : new RegularCustomer(2)
+note right of C2 : satisfaction = 100\nstate = QUEUED
+AS --> GE : Optional(c2)
+GE -> R : addToQueue(c2)
+R -> Q : enqueue(c2)
+GE -> W : resetTurn()
+GE -> CH : resetTurn()
+GE -> CA : resetTurn()
+deactivate GE
+CLI -> CLI : printState()
+loop until result.isSuccess() promptWaiter()
+  CLI -> Manager : Waiter: 1=Seat 2=Take order 3=Serve 4=Wait
+  Manager --> CLI : choice
+  alt choice = Seat, customer id = 2
+    CLI -> GE : applyWaiterAction(SEAT, 2)
+    GE -> R : getCustomerById(2)
+    R --> GE : c2
+    GE -> R : findFreeTable()
+    R --> GE : Optional(table2)
+    GE -> W : seat(c2, table2, restaurant, 4)
+    note right of W : guards: !hasActed()\nc2.getState() == QUEUED\ntable2.isFree()
+    W -> T : seat(c2)
+    W -> Q : remove(c2)
+    W -> C2 : setState(SEATED)
+    W -> C2 : setSeatedTurn(4)
+    W -> W : markActed()
+    W --> GE : ActionResult.ok("Customer 2 seated at table 2.")
+    GE --> CLI : result (success)
+  else choice = Wait  (manager choice that changes the outcome)
+    CLI -> GE : applyWaiterAction(WAIT, 0)
+    GE --> CLI : ActionResult.ok("Waiter waits.")
+    note right of CLI : c2 stays QUEUED and keeps losing 8 per turn,\nso it is served later and pays with lower satisfaction\n(or leaves unhappy if it reaches 0).
+  else invalid choice, e.g. no free table or wrong id
+    CLI -> GE : applyWaiterAction(task, id)
+    GE --> CLI : ActionResult.fail(reason)
+    CLI -> Manager : reason + "Choose again." (task not used up)
+  end
+end
+CLI -> GE : applyChefAction(0)
+GE --> CLI : ActionResult.ok("Chef waits.")
+CLI -> GE : finishTurn()
+activate GE
+GE -> CA : collectPayment(restaurant)
+CA -> R : getReadyToPayOldestFirst()
+R --> CA : empty list
+CA --> GE : Optional.empty()
+loop for each customer c  step 4: eating
+  note over GE : [c.getState() == EATING and c.getServedTurn() < 4]\ncustomer 1 becomes READY_TO_PAY (calls as in turn 7)
+end
+loop for each customer c  step 5: waiting
+  GE -> C2 : applyWaitingLoss()
+  C2 -> C2 : isWaitingForService()  (true: SEATED)
+  C2 -> C2 : waitingLoss()
+  note right of C2 : RegularCustomer.waitingLoss() returns 8\nsatisfaction 100 -> 92
+  GE -> C2 : isAbandoned()
+  C2 --> GE : false
+  opt c.isAbandoned()  (not taken in this run)
+    GE -> R : removeAbandoned(c)
+  end
+end
+GE --> CLI : TurnSummary
+deactivate GE
+CLI -> CLI : printSummary(summary)
+== Turn 5: customer 2 orders, the Chef cooks, customer 1 pays ==
+CLI -> GE : startTurn()
+note right of GE : no arrival this turn; staff resetTurn() as in turn 4
+Manager --> CLI : Waiter: Take order, customer 2
+CLI -> GE : applyWaiterAction(TAKE_ORDER, 2)
+GE -> R : getCustomerById(2)
+GE -> W : takeOrder(c2, restaurant)
+note right of W : guards: !hasActed()\nc2.getState() == SEATED
+W -> C2 : chooseFood(menu)
+C2 -> M : get((2 - 1) % 3)
+M --> C2 : Burger
+note right of C2 : the customer chooses, never the manager\n(rule: menu index = (id - 1) mod 3)
+C2 --> W : Burger
+W -> R : createOrder(c2, Burger)
+create O
+R -> O : new Order(2, c2, Burger)
+O -> C2 : applyDiscount(1500)
+C2 --> O : 1500
+note right of O : Customer.applyDiscount() default: full price.\n1500 cents ($15.00) locked into priceCents.\nstatus = PLACED
+R --> W : o2
+W -> C2 : setState(ORDERED)
+W -> W : markActed()
+W --> GE : ActionResult.ok("Customer 2 orders Burger ...")
+GE --> CLI : result (success)
+alt Chef choice = Prepare, order id = 2
+  CLI -> GE : applyChefAction(2)
+  GE -> R : getOrderById(2)
+  GE -> CH : prepare(o2)
+  note right of CH : guards: !hasActed()\no2.getStatus() == PLACED
+  CH -> O : advance()
+  note right of O : unitsDone 1/1 -> status = READY.\nThe Waiter already acted, so o2 can be served\nnext turn at the earliest.
+  CH -> CH : markActed()
+  CH --> GE : ActionResult.ok("... It is now READY.")
+else Chef choice = Wait  (manager choice that changes the outcome)
+  note over CLI, CH : o2 stays PLACED, so it cannot be served on turn 6;\nc2 waits another turn and loses 8 more satisfaction.
+end
+CLI -> GE : finishTurn()
+GE -> CA : collectPayment(restaurant)
+note right of CA : customer 1 pays $9.00 (same calls as turn 8)
+GE -> C2 : applyWaitingLoss()
+note right of C2 : still ORDERED, so loses 8: satisfaction 92 -> 84
+== Turn 6: the Waiter serves the READY order ==
+CLI -> GE : startTurn()
+Manager --> CLI : Waiter: Serve, order 2
+CLI -> GE : applyWaiterAction(SERVE, 2)
+GE -> R : getOrderById(2)
+GE -> W : serve(o2, restaurant, 6)
+note right of W : guards: !hasActed()\no2.getStatus() == READY
+W -> O : markServed()
+note right of O : status = SERVED
+W -> O : getCustomer()
+O --> W : c2
+W -> C2 : setState(EATING)
+W -> C2 : setServedTurn(6)
+W -> GS : recordServed()
+W -> W : markActed()
+W --> GE : ActionResult.ok("Order #2 (Burger) served to Customer 2.")
+CLI -> GE : finishTurn()
+GE -> C2 : applyWaitingLoss()
+note right of C2 : isWaitingForService() is false (EATING):\nno loss, satisfaction stays 84
+== Turn 7: customer 2 finishes eating ==
+note over CLI, W : customer 3 arrives and is seated (same calls as turn 4)
+CLI -> GE : finishTurn()
+GE -> CA : collectPayment(restaurant)
+CA --> GE : Optional.empty()  (nobody READY_TO_PAY yet)
+loop for each customer c  step 4: eating
+  GE -> C2 : getState()
+  C2 --> GE : EATING
+  GE -> C2 : getServedTurn()
+  C2 --> GE : 6
+  opt state == EATING and servedTurn (6) < currentTurn (7)
+    GE -> C2 : setState(READY_TO_PAY)
+    GE -> C2 : setReadyToPayTurn(7)
+  end
+end
+note right of GE : the Cashier ran before this step, so c2 pays next turn at the earliest
+== Turn 8: the Cashier collects payment ==
+CLI -> GE : finishTurn()
+activate GE
+GE -> CA : collectPayment(restaurant)
+CA -> CA : hasActed()  (false)
+CA -> R : getReadyToPayOldestFirst()
+R --> CA : [c2]
+CA -> R : getActiveOrderOf(c2)
+R --> CA : Optional(o2)
+CA -> O : getPriceCents()
+O --> CA : 1500
+CA -> C2 : getSatisfaction()
+C2 --> CA : 84
+CA -> GS : recordPayment(1500, 84)
+note right of GS : revenue += $15.00, paidCount++,\nsatisfaction 84 recorded for the average
+CA -> O : markPaid()
+CA -> C2 : setState(PAID)
+CA -> R : getTableOf(c2)
+R --> CA : Optional(table2)
+CA -> T : free()
+CA -> CA : markActed()
+CA --> GE : Optional(o2)
+GE --> CLI : TurnSummary ("Cashier collects $15.00 from Customer 2 ...")
+deactivate GE
+== Turns 9 to 18: the other customers follow the same pattern ==
+end
+== After turn 18: result check ==
+CLI -> GE : isGameOver()
+GE --> CLI : true (currentTurn > 18)
+CLI -> GE : evaluateResult()
+GE -> GS : evaluate(config)
+alt paidCount >= 4 and revenue >= 4500 cents and average satisfaction >= 60
+  GS --> GE : VICTORY
+else any target missed
+  GS --> GE : DEFEAT
+end
+GE --> CLI : GameResult
+CLI -> Manager : printFinalResult()  RESULT: VICTORY
+@enduml
