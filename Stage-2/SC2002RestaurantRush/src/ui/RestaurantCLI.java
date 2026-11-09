@@ -17,11 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-/**
- * Text UI. Collects the manager's decisions and displays state. Every rule lives in
- * the engine, staff and domain classes; this class only translates between the
- * console and GameEngine.
- */
+
 public class RestaurantCLI {
     private final Scanner scanner = new Scanner(System.in);
     private final GameEngine engine;
@@ -31,7 +27,7 @@ public class RestaurantCLI {
     }
 
     public void run() {
-        System.out.println("=== SC2002 Restaurant Rush (Stage 1) ===");
+        System.out.println("=== SC2002 Restaurant Rush (Stage 2) ===");
         while (!engine.isGameOver()) {
             engine.startTurn();
             printState();
@@ -42,8 +38,7 @@ public class RestaurantCLI {
         printFinalResult(engine.evaluateResult());
     }
 
-    // ---------- display ----------
-
+    
     private void printState() {
         Restaurant r = engine.getRestaurant();
         GameStats s = r.getStats();
@@ -124,7 +119,7 @@ public class RestaurantCLI {
         return avg.map(v -> String.format("%.1f", v)).orElse("N/A");
     }
 
-    // ---------- input ----------
+   
 
     private void promptWaiter() {
         while (true) {
@@ -158,7 +153,7 @@ public class RestaurantCLI {
         }
     }
 
-    /** Reads a whole line and parses it, so bad input never crashes the game. */
+    
     private int readInt(String prompt) {
         while (true) {
             System.out.print(prompt);
