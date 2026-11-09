@@ -12,7 +12,7 @@ import ui.RestaurantCLI;
 
 public class Main {
     public static void main(String[] args) {
-        // "java -cp out app.Main regular" runs the Stage 1 all-Regular schedule (regression replays).
+        
         boolean regularOnly = args.length > 0 && args[0].equalsIgnoreCase("regular");
         GameConfig config = regularOnly ? GameConfig.regularOnly() : new GameConfig();
         Menu menu = new Menu();
