@@ -12,16 +12,19 @@ import ui.RestaurantCLI;
 
 public class Main {
     public static void main(String[] args) {
-        GameConfig config = new GameConfig();
+        // "java -cp out app.Main regular" runs the Stage 1 all-Regular schedule (regression replays).
+        boolean regularOnly = args.length > 0 && args[0].equalsIgnoreCase("regular");
+        GameConfig config = regularOnly ? GameConfig.regularOnly() : new GameConfig();
         Menu menu = new Menu();
         Restaurant restaurant = new Restaurant(config.getTableCount(), menu);
 
         Waiter waiter = new Waiter("Waiter");
         Chef chef = new Chef("Chef");
         Cashier cashier = new Cashier("Cashier");
-        ArrivalSchedule schedule = new ArrivalSchedule(config.getArrivalTurns());
+        ArrivalSchedule schedule = new ArrivalSchedule(config.getArrivalTurns(), config.getArrivalTypes());
 
         GameEngine engine = new GameEngine(restaurant, waiter, chef, cashier, schedule, config);
         new RestaurantCLI(engine).run();
     }
 }
+
