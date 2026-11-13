@@ -207,7 +207,7 @@ This section describes the `stage-2` tag; see that tag's README for the Stage 2 
 | `src/enums/CustomerType.java` | REGULAR, VIP, CRITIC: names the kind of each scheduled arrival. |
 | `tests/stage1-victory.txt` | The Stage 1 victory inputs, kept for the regression check. |
 | `docs/class-diagram-stage2.drawio` | Stage 2 class diagram. |
-| `docs/stage2-sequence-diagram.*` | Stage 2 sequence diagram (VIP from arrival to payment). |
+
 
 **Changed files**
 
@@ -238,7 +238,7 @@ Compare link: `<repo-url>/compare/stage-2...stage-3` (replace `<repo-url>` with 
 | `src/domain/ComboMeal.java` | A `MenuItem` made of two existing items: units added, price 90% of the total. |
 | `src/domain/HappyHour.java` | Once per game, two turns, 20% off new orders, 15 satisfaction recovery while active. |
 | `docs/class-diagram-stage3.*` | Stage 3 class diagram (final design). |
-| `docs/stage3-sequence-diagram.*` | Stage 3 sequence diagram (VIP orders during Happy Hour). |
+
 
 **Changed files**
 
