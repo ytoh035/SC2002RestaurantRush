@@ -164,7 +164,6 @@ any order exists, then seating customer 1 succeeds on the fourth attempt.
 
 ## Stage 1 to Stage 2 changes
 
-Compare link: `<repo-url>/compare/stage-1...stage-2` (replace `<repo-url>` with our GitHub URL).
 
 **New files**
 
