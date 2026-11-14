@@ -49,7 +49,7 @@ replayed from a file: `java -cp out app.Main < tests/victory.txt`.
 5. After turn 18, `evaluateResult()` returns VICTORY if paid customers >= 4, revenue >= $45.00 and the
    average recorded satisfaction of paid customers >= 60, otherwise DEFEAT.
 
-## Rules decided by me
+## Rules decided by us
 
 **Food choice.** Customers choose their own food. `Customer.chooseFood(menu)` uses a deterministic rule:
 menu index = (customer id - 1) mod 3, so customers 1 to 6 order Salad, Burger, Pasta, Salad, Burger,
