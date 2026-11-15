@@ -14,9 +14,9 @@ Lab group SCED, Group 4: Toh Yu Chen, Lee Geng Yun, Sharma Siddhanth, Aman Shaje
 
 * **AI History Logs:** 
   * [Toh Yu Chen AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/yuchen/ai-history/stage-3/chat-01.md)
-  * [Lee Geng Yun AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/Lee-Geng-Yun-AI-History/ geng_yun%20-%20Google%20Gemini.pdf)
+  * [Lee Geng Yun AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/Lee-Geng-Yun-AI-History/geng_yun%20-%20Google%20Gemini.pdf)
   * [Sharma Siddhanth AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/Sharma-Siddhanth-ai-history/ai-history/stage-3/chat-01.md) 
-  * [Aman Shajee AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/aman-shajee-ai-history/ai-history/stage-3/ chat-01.md)
+  * [Aman Shajee AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/aman-shajee-ai-history/ai-history/stage-3/chat-01.md)
 
 * **Video Presentation Link:** [Watch Video Presentation](https://youtu.be/hMqCSqS3nNs)
 
