@@ -1,4 +1,6 @@
 # SC2002 Restaurant Rush – AI Collaboration Log
+Member: Sharma Siddhanth
+Tool: Gemini
 
 ## Part 1: Structuring Segment 2 (Gameplay Demonstration & Key Outcomes)
 
