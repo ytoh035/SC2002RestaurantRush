@@ -6,15 +6,15 @@ Lab group SCED, Group 4: Toh Yu Chen, Lee Geng Yun, Sharma Siddhanth, Aman Shaje
 *Note: The team has internal agreement (confirmed by TA) to use separate folders instead of tags for stage delineation.*
 
 ## Submission & Project Links
-* **Repository URL:** (https://github.com/ytoh035/SC2002RestaurantRush.git)
+* **Repository URL:** https://github.com/ytoh035/SC2002RestaurantRush
 * **Folder Links:** 
-  * [Stage-1 Folder] (https://github.com/ytoh035/SC2002RestaurantRush/tree/main/Stage-1/SC2002RestaurantRush)
-  * [Stage-2 Folder] (https://github.com/ytoh035/SC2002RestaurantRush/tree/main/Stage-2/SC2002RestaurantRush)
-  * [Stage-3 Folder] (https://github.com/ytoh035/SC2002RestaurantRush/tree/main/Stage-3/SC2002RestaurantRush)
+  * [Stage-1 Folder](https://github.com/ytoh035/SC2002RestaurantRush/tree/main/Stage-1/SC2002RestaurantRush)
+  * [Stage-2 Folder](https://github.com/ytoh035/SC2002RestaurantRush/tree/main/Stage-2/SC2002RestaurantRush)
+  * [Stage-3 Folder](https://github.com/ytoh035/SC2002RestaurantRush/tree/main/Stage-3/SC2002RestaurantRush)
 
 * **AI History Logs:** 
   * [Toh Yu Chen AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/yuchen/ai-history/stage-3/chat-01.md)
-  * [Lee Geng Yun AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/Lee-Geng-Yun-AI-History/geng_yun%20-%20Google%20Gemini.pdf)
+  * [Lee Geng Yun AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/Lee-Geng-Yun-AI-History/ geng_yun%20-%20Google%20Gemini.pdf)
   * [Sharma Siddhanth AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/Sharma-Siddhanth-ai-history/ai-history/stage-3/chat-01.md) 
   * [Aman Shajee AI Branch / Logs](https://github.com/ytoh035/SC2002RestaurantRush/blob/aman-shajee-ai-history/ai-history/stage-3/chat-01.md)
 
@@ -32,39 +32,45 @@ Each stage README lists every file added, changed or deleted in the transition, 
   [ArrivalSchedule](https://github.com/ytoh035/SC2002RestaurantRush/commit/ae43a77042630ff9dd97d430149f14c4e35b832f) ·
   [GameConfig and ArrivalSchedule wiring](https://github.com/ytoh035/SC2002RestaurantRush/commit/8be537d67a72179233973901e07e4d5047295242) ·
   [RestaurantCLI](https://github.com/ytoh035/SC2002RestaurantRush/commit/dd9d9226f30fe4053ca3f7fc6793c0a0a3226790)
-- **Stage 2 to Stage 3:** 3 classes added, 8 modified, 21 of 29 unchanged (the customer subclasses, `CustomerFactory`, `Chef` and `Cashier` (did not change). Details: "Stage 2 to Stage 3 changes" in the [Stage 3 README](Stage-3/SC2002RestaurantRush/README.md).
+- **Stage 2 to Stage 3:** 3 classes added, 8 modified, 21 of 29 unchanged (the customer subclasses, `CustomerFactory`, `Chef` and `Cashier` did not change). Details: "Stage 2 to Stage 3 changes" in the [Stage 3 README](Stage-3/SC2002RestaurantRush/README.md).
   Commit: [Stage 3 folder uploaded after integration](https://github.com/ytoh035/SC2002RestaurantRush/commit/ea2207148fbd12600748e2ba6cdbf352f370c18c) (built and tested together, then committed as one batch).
 
 To see every line that changed between two stages, from the repository root:
 
     git diff --no-index Stage-1/SC2002RestaurantRush/src Stage-2/SC2002RestaurantRush/src
     git diff --no-index Stage-2/SC2002RestaurantRush/src Stage-3/SC2002RestaurantRush/src
+
 ---
 
-## ⏱️ Video Presentation Timestamps (7 Required Timestamps)
-Link: [https://youtu.be/hMqCSqS3nNs]
+## Video presentation timestamps
+
+Video: https://youtu.be/hMqCSqS3nNs
+
+Items marked [R1] to [R7] are the brief's 7 required demonstrations.
+
 | Time | Segment |
 |------|---------|
 | 0:00 | 1. Game overview and the three stages |
-| 0:50 | The game launching from the submitted Stage 3 project (VS Code, F5) |
+| 0:50 | [R1] The game launching from the submitted Stage 3 project (VS Code, F5) |
 | 1:27 | 2. Gameplay demonstration and key outcomes |
-| 1:48 | A dish going READY -> SERVED (turn 2); payment collected at the end of turn 4 (3:02) |
-| 2:12 | VIP arrives and the manager switches on Happy Hour (turn 4): VIP Burger $10.80 |
-| 3:16 | Stage 3 combo: customer 3 orders the Salad + Pasta Combo (turn 7) |
-| 3:32 | Invalid input and an order that is not READY are refused (turn 8) |
-| 4:00 | Manager choice with staff constrained: Host seats the Critic while the Waiter serves (turn 10) |
-| 4:12 | Critic orders the most expensive single dish, Pasta (turn 11) |
-| 4:28 | One victory and one defeat (replayed from the test files) |
-| 4:45 | 3. Class diagrams and evidence of stage changes |
-| 7:20 | 3.5 Change map (classes added / modified / unchanged) and design principles |
+| 1:48 | [R3] A dish going READY -> SERVED (turn 2); payment collected at the end of turn 4 (3:02) |
+| 2:12 | [R4][R5] VIP arrives and the manager switches on Happy Hour (turn 4): VIP Burger $10.80 |
+| 3:16 | [R5] Stage 3 combo: customer 3 orders the Salad + Pasta Combo (turn 7) |
+| 3:32 | [R2] Invalid input and an order that is not READY are refused (turn 8) |
+| 4:00 | [R2] Manager choice with staff constrained: Host seats the Critic while the Waiter serves (turn 10) |
+| 4:12 | [R4] Critic orders the most expensive single dish, Pasta (turn 11) |
+| 4:28 | [R6] One victory and one defeat (replayed from the test files) |
+| 4:45 | [R7] 3. Class diagrams and evidence of stage changes |
+| 7:20 | [R7] 3.5 Change map (classes added / modified / unchanged) and design principles |
 | 8:31 | 4. Selected use case and sequence diagram (a VIP orders during Happy Hour) |
 | 12:01 | 5. Individual contributions and key learning |
 
 
 ---
 
-A turn based restaurant management game written in Java for SC2002 Object Oriented Design and Programming.
-This version is Stage 3 (folder `Stage-3`), the final version.
+## Stages
+
+The repository holds all three stages side by side. The sections below describe Stage 3 (folder `Stage-3`), the final version.
 
 | Folder | What it contains |
 |-----|------------------|
