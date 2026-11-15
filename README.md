@@ -46,22 +46,22 @@ To see every line that changed between two stages, from the repository root:
 
 Video: https://youtu.be/hMqCSqS3nNs
 
-Items marked [R1] to [R7] are the brief's 7 required demonstrations.
+
 
 | Time | Segment |
 |------|---------|
 | 0:00 | 1. Game overview and the three stages |
-| 0:50 | [R1] The game launching from the submitted Stage 3 project (VS Code, F5) |
+| 0:50 | The game launching from the submitted Stage 3 project (VS Code, F5) |
 | 1:27 | 2. Gameplay demonstration and key outcomes |
-| 1:48 | [R3] A dish going READY -> SERVED (turn 2); payment collected at the end of turn 4 (3:02) |
-| 2:12 | [R4][R5] VIP arrives and the manager switches on Happy Hour (turn 4): VIP Burger $10.80 |
-| 3:16 | [R5] Stage 3 combo: customer 3 orders the Salad + Pasta Combo (turn 7) |
-| 3:32 | [R2] Invalid input and an order that is not READY are refused (turn 8) |
-| 4:00 | [R2] Manager choice with staff constrained: Host seats the Critic while the Waiter serves (turn 10) |
-| 4:12 | [R4] Critic orders the most expensive single dish, Pasta (turn 11) |
-| 4:28 | [R6] One victory and one defeat (replayed from the test files) |
-| 4:45 | [R7] 3. Class diagrams and evidence of stage changes |
-| 7:20 | [R7] 3.5 Change map (classes added / modified / unchanged) and design principles |
+| 1:48 |  A dish going READY -> SERVED (turn 2); payment collected at the end of turn 4 (3:02) |
+| 2:12 | VIP arrives and the manager switches on Happy Hour (turn 4): VIP Burger $10.80 |
+| 3:16 | Stage 3 combo: customer 3 orders the Salad + Pasta Combo (turn 7) |
+| 3:32 | Invalid input and an order that is not READY are refused (turn 8) |
+| 4:00 |  Manager choice with staff constrained: Host seats the Critic while the Waiter serves (turn 10) |
+| 4:12 | Critic orders the most expensive single dish, Pasta (turn 11) |
+| 4:28 |  One victory and one defeat (replayed from the test files) |
+| 4:45 |  3. Class diagrams and evidence of stage changes |
+| 7:20 |  3.5 Change map (classes added / modified / unchanged) and design principles |
 | 8:31 | 4. Selected use case and sequence diagram (a VIP orders during Happy Hour) |
 | 12:01 | 5. Individual contributions and key learning |
 
