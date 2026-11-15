@@ -145,9 +145,9 @@ The game reads one choice per line, so every run can be replayed from the input 
 
 | Diagram | Files |
 |---------|-------|
-| Stage 1 class diagram | [`Stage-1/SC2002RestaurantRush/docs/`](Stage-2/SC2002RestaurantRush/docs/stage1classdiagram.png) (`class-diagram-stage1.drawio`, `.png`) |
-| Stage 2 class diagram | [`Stage-2/SC2002RestaurantRush/docs/`](Stage-2/SC2002RestaurantRush/docs/stage2classdiagram.pngs) (`class-diagram-stage2.drawio`, `.png`) |
-| Stage 3 class diagram | [`Stage-3/SC2002RestaurantRush/docs/`](Stage-2/SC2002RestaurantRush/docs/stage3classdiagram.png) (`class-diagram-stage3.drawio`, `.png`) |
+| Stage 1 class diagram | [stage1classdiagram.png](Stage-1/SC2002RestaurantRush/docs/stage1classdiagram.png) |
+| Stage 2 class diagram | [stage2classdiagram.png](Stage-2/SC2002RestaurantRush/docs/stage2classdiagram.png) |
+| Stage 3 class diagram | [stage3classdiagram.png](Stage-3/SC2002RestaurantRush/docs/stage3classdiagram.png) |
 | Stage 3 sequence diagram (a VIP orders during Happy Hour) | [`Stage-3/SC2002RestaurantRush/docs/`](Stage-3/SC2002RestaurantRush/docs) (`stage3-sequence-diagram.drawio`, `.png`) |
 
 The `.drawio` files open in [diagrams.net](https://app.diagrams.net).
